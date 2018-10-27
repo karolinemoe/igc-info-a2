@@ -1,1 +1,1 @@
-web: igc-info-a2
+web: CT-1

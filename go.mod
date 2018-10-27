@@ -1,4 +1,4 @@
-module cloud-tech-imt2681/igc-info-a2
+module cloud-tech-imt2681/CT-1
 
         require (
         github.com/gorilla/mux v1.6.2
