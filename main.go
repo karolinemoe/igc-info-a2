@@ -7,7 +7,7 @@ import (
 
 func main() {
 
-	root := "paragliding"
+	root := "/paragliding"
 	http.HandleFunc(root+"/api", apiHandler)
 }
 
