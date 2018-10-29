@@ -21,18 +21,6 @@ func DBConnect() (bool, error) {
 	return true, err
 }
 
-/*func GetTracks() interface{} {
-
-	tracks := bson.NewDocument()
-	err := collection.FindOne(context.Background(), map[string]string{}).Decode(&tracks)
-	if err != nil {
-		log.Fatal(err)
-		return nil
-	}
-	tracks.WriteDocument(32, &tracks)
-	return tracks
-}*/
-
 func InsertTrack(track IGCTrack) interface{} {
 	res, err := collection.InsertOne(context.Background(), &track)
 	if err != nil {
