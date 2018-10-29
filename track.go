@@ -3,6 +3,8 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
+	"github.com/gorilla/mux"
 	"github.com/marni/goigc"
 	"github.com/mitchellh/hashstructure"
 	"net/http"
@@ -98,6 +100,22 @@ func calcTrackLength(points []igc.Point) float64 {
 		tl += points[i].Distance(points[i+1])
 	}
 	return tl
+}
+
+func GetTrackWithId(w http.ResponseWriter, r *http.Request) {
+	param := mux.Vars(r)
+	fmt.Println("GET track with ID", param["id"])
+
+	/**
+	find the corresponding track
+	 */
+	track, err := FindTrack(param["id"])
+	if err != nil {
+		http.Error(w, "No Content", 204)
+		return
+	}
+
+	json.NewEncoder(w).Encode(track)
 }
 
 /*func trackExists(trackID int) bool {

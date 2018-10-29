@@ -6,6 +6,7 @@ import (
 	"google.golang.org/appengine"
 	"net/http"
 	"time"
+	"github.com/gorilla/mux"
 )
 
 var startTime = time.Now()
@@ -23,9 +24,13 @@ func main() {
 	}
 
 	root := "/paragliding"
+	r := mux.NewRouter()
+	route := r.PathPrefix(root+"/api").Subrouter()
+
 	http.HandleFunc(root, rootHandler)
 	http.HandleFunc(root+"/api", apiHandler)
 	http.HandleFunc(root+"/api/track", TrackHandler)
+	route.HandleFunc("/track/{id}", GetTrackWithId)
 
 	appengine.Main()
 }

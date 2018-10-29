@@ -41,3 +41,18 @@ func InsertTrack(track IGCTrack) interface{} {
 	}
 	return res.InsertedID
 }
+
+func FindTrack(ID string) (interface{}, error) {
+
+	collection := db.Collection("tracks")
+
+	track := bson.NewDocument()
+	err := collection.FindOne(context.Background(), map[string]string{"id": ID}).Decode(&track)
+	if err != nil {
+		log.Fatal(err)
+		return nil, err
+	}
+
+	track.WriteDocument(32, &track)
+	return track, nil
+}
