@@ -31,7 +31,7 @@ func TrackHandler(w http.ResponseWriter, r *http.Request) {
 		/*tracks := GetTracks()
 		json.NewEncoder(w).Encode(tracks)
 		*/
-		json.NewEncoder(w).Encode("Get the IGC tracks from DB"); return
+		json.NewEncoder(w).Encode("Get IGC tracks from DB"); return
 
 
 	/**
