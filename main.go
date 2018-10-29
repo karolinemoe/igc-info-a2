@@ -29,7 +29,7 @@ func apiHandler(w http.ResponseWriter, r *http.Request) {
 
 	dbconnection, err := DBConnect()
 
-	if dbconnection {
+	if dbconnection == true {
 		fmt.Println("Connected to database")
 	} else {
 		fmt.Println(err)
