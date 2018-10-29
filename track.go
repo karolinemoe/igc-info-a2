@@ -28,7 +28,8 @@ func TrackHandler(w http.ResponseWriter, r *http.Request) {
 	If the http request method == GET
 	 */
 	case http.MethodGet:
-		json.NewEncoder(w).Encode("Get tracks"); return
+		tracks := GetTracks()
+		json.NewEncoder(w).Encode(tracks); return
 
 	/**
 	If the http request method == POST
@@ -98,11 +99,3 @@ func calcTrackLength(points []igc.Point) float64 {
 	}
 	return tl
 }
-
-/*func trackExists(trackID int) bool {
-	if (trackID == 1) {
-		return true
-	} else {
-		return false
-	}
-}*/
