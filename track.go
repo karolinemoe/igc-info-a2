@@ -49,6 +49,8 @@ func TrackHandler(w http.ResponseWriter, r *http.Request) {
 		if newID < 0 {
 			http.Error(w, "Not able to process the URL", http.StatusBadRequest)
 			return
+		//} else if newID == -1 {
+		//	fmt.Println("Track already exists in database")
 		}
 	default:
 		http.Error(w, "No specified request method", 400); return
