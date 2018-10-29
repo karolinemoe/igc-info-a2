@@ -25,10 +25,15 @@ func main() {
 	}
 
 	root := "/paragliding"
+	http.HandleFunc(root, rootHandler)
 	http.HandleFunc(root+"/api", apiHandler)
 	http.HandleFunc(root+"/api/igc", igcHandler)
 
 	appengine.Main()
+}
+
+func rootHandler (w http.ResponseWriter, r *http.Request) {
+	http.Redirect(w, r, "/paragliding/api", 200)
 }
 
 /**
