@@ -52,7 +52,7 @@ func apiHandler(w http.ResponseWriter, r *http.Request) {
 
 	i, _ := json.MarshalIndent(info, "", " ")
 
-	fmt.Fprint(w, "\n\n", dbStatus, string(i))
+	fmt.Fprint(w, dbStatus, "\n\n", string(i))
 }
 
 /**
