@@ -51,7 +51,7 @@ func apiHandler(w http.ResponseWriter, r *http.Request) {
 
 	i, _ := json.MarshalIndent(info, "", " ")
 
-	fmt.Fprint(w, string(i))
+	fmt.Fprint(w, string(i), "\n", dbconnection)
 }
 
 /**
