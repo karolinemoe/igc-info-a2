@@ -76,9 +76,9 @@ func newTrack(url string, w http.ResponseWriter) int {
 
 	trackID := int(checksum)
 
-	exists := TrackExists(strconv.Itoa(trackID))
+	//exists := TrackExists(strconv.Itoa(trackID))
 
-	if !exists {
+	//if !exists {
 		/**
 	store data in memory
 	  */
@@ -99,8 +99,8 @@ func newTrack(url string, w http.ResponseWriter) int {
 
 		json.NewEncoder(w).Encode(IGCid{ID: trackID})
 		return trackID
-	}
-	return -1
+	//}
+	//return -1
 }
 
 func calcTrackLength(points []igc.Point) float64 {
