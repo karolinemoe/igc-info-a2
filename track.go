@@ -31,7 +31,8 @@ func TrackHandler(w http.ResponseWriter, r *http.Request) {
 	 */
 	case http.MethodGet:
 		tracks := GetTracks()
-		json.NewEncoder(w).Encode(tracks); return
+		//json.NewEncoder(w).Encode(tracks)
+		fmt.Println(tracks); return
 
 		/**
 		If the http request method == POST
