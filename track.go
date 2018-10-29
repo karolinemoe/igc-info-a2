@@ -3,6 +3,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/marni/goigc"
 	"github.com/mitchellh/hashstructure"
 	"net/http"
@@ -29,9 +30,11 @@ func TrackHandler(w http.ResponseWriter, r *http.Request) {
 	If the http request method == GET
 	 */
 	case http.MethodGet:
-		/**
-		If the http request method == POST
-		 */
+	/**
+	If the http request method == POST
+	 */
+
+
 	case http.MethodPost:
 		var body struct{ URL string }
 		err := json.NewDecoder(r.Body).Decode(&body)
@@ -47,6 +50,8 @@ func TrackHandler(w http.ResponseWriter, r *http.Request) {
 		if newID < 0 {
 			http.Error(w, "Not able to process the URL", http.StatusBadRequest)
 			return
+		} else if newID == 0 {
+			fmt.Println("Track allready exists in database")
 		}
 	default:
 		http.Error(w, "No specified request method", 400); return
@@ -70,26 +75,31 @@ func newTrack(url string, w http.ResponseWriter) int {
 
 	trackID := int(checksum)
 
-	/**
+	exists := TrackExists(strconv.Itoa(trackID))
+
+	if !exists {
+		/**
 	store data in memory
 	  */
-	trackData := IGCTrack{
-		HDate:       igcData.Date,
-		Pilot:       igcData.Pilot,
-		Glider:      igcData.GliderType,
-		GliderID:    igcData.GliderID,
-		TrackLength: calcTrackLength(igcData.Points),
-		ID:     	strconv.Itoa(int(trackID)),
+		trackData := IGCTrack{
+			HDate:       igcData.Date,
+			Pilot:       igcData.Pilot,
+			Glider:      igcData.GliderType,
+			GliderID:    igcData.GliderID,
+			TrackLength: calcTrackLength(igcData.Points),
+			ID:          strconv.Itoa(int(trackID)),
+		}
+
+		InsertTrack(trackData)
+
+		type IGCid struct {
+			ID int `json:"id"`
+		}
+
+		json.NewEncoder(w).Encode(IGCid{ID: trackID})
+		return trackID
 	}
-
-	InsertTrack(trackData)
-
-	type IGCid struct {
-		ID int `json:"id"`
-	}
-
-	json.NewEncoder(w).Encode(IGCid{ID: trackID})
-	return trackID
+	return 0
 }
 
 func calcTrackLength(points []igc.Point) float64 {
@@ -100,10 +110,3 @@ func calcTrackLength(points []igc.Point) float64 {
 	return tl
 }
 
-/*func trackExists(trackID int) bool {
-	if (trackID == 1) {
-		return true
-	} else {
-		return false
-	}
-}*/
