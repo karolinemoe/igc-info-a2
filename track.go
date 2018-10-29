@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/marni/goigc"
 	"github.com/mitchellh/hashstructure"
 	"net/http"
@@ -53,8 +54,11 @@ func TrackHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func getTracks(w http.ResponseWriter) {
+	fmt.Fprint(w, "Get tracks")
+	/*
 	tracks := GetTracks()
 	json.NewEncoder(w).Encode(tracks)
+	*/
 }
 
 /**
