@@ -28,15 +28,11 @@ func TrackHandler(w http.ResponseWriter, r *http.Request) {
 	If the http request method == GET
 	 */
 	case http.MethodGet:
-		/*tracks := GetTracks()
-		json.NewEncoder(w).Encode(tracks)
-		*/
-		json.NewEncoder(w).Encode("Get IGC tracks from DB"); return
+		json.NewEncoder(w).Encode("Get IGC tracks from MongoDB"); return
 
-
-	/**
-	If the http request method == POST
-	 */
+		/**
+		If the http request method == POST
+		 */
 	case http.MethodPost:
 		var body struct{ URL string }
 		err := json.NewDecoder(r.Body).Decode(&body)
@@ -102,3 +98,11 @@ func calcTrackLength(points []igc.Point) float64 {
 	}
 	return tl
 }
+
+/*func trackExists(trackID int) bool {
+	if (trackID == 1) {
+		return true
+	} else {
+		return false
+	}
+}*/
