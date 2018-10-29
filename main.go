@@ -35,6 +35,8 @@ func apiHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 
+	fmt.Println("testttttt")
+
 	type Info struct {
 		Uptime string `json:"uptime"`
 		Info string `json:"info"`
