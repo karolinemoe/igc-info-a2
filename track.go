@@ -28,9 +28,11 @@ func TrackHandler(w http.ResponseWriter, r *http.Request) {
 	If the http request method == GET
 	 */
 	case http.MethodGet:
-		/**
-		If the http request method == POST
-		 */
+		json.NewEncoder(w).Encode("Get tracks"); return
+
+	/**
+	If the http request method == POST
+	 */
 	case http.MethodPost:
 		var body struct{ URL string }
 		err := json.NewDecoder(r.Body).Decode(&body)
@@ -44,8 +46,7 @@ func TrackHandler(w http.ResponseWriter, r *http.Request) {
 
 		newID := newTrack(body.URL, w)
 		if newID < 0 {
-			http.Error(w, "Not able to process the URL", http.StatusBadRequest)
-			return
+			http.Error(w, "Not able to process the URL", http.StatusBadRequest); return
 		}
 	default:
 		http.Error(w, "No specified request method", 400); return
