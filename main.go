@@ -28,11 +28,12 @@ func apiHandler(w http.ResponseWriter, r *http.Request) {
 
 
 	dbconnection, err := DBConnect()
+	dbStatus := ""
 
 	if dbconnection == true {
-		fmt.Println("Connected to database")
+		dbStatus = "Connected to database"
 	} else {
-		fmt.Println(err)
+		dbStatus =  err.Error()
 	}
 
 	fmt.Println("testttttt")
@@ -51,7 +52,7 @@ func apiHandler(w http.ResponseWriter, r *http.Request) {
 
 	i, _ := json.MarshalIndent(info, "", " ")
 
-	fmt.Fprint(w, string(i), "\n", dbconnection)
+	fmt.Fprint(w, "\n\n", dbStatus, string(i))
 }
 
 /**
