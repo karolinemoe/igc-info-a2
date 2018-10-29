@@ -5,7 +5,6 @@ import (
 	"github.com/mongodb/mongo-go-driver/bson"
 	"github.com/mongodb/mongo-go-driver/mongo"
 	"log"
-
 )
 
 var db *mongo.Database
@@ -23,7 +22,7 @@ func DBConnect() (bool, error) {
 	return true, err
 }
 
-func GetTracks() interface{} {
+/*func GetTracks() interface{} {
 	track := bson.NewDocument()
 	err := collection.FindOne(context.Background(), map[string]string{}).Decode(&track)
 	if err != nil {
@@ -31,7 +30,7 @@ func GetTracks() interface{} {
 	}
 	track.WriteDocument(32, &track)
 	return track
-}
+}*/
 
 func TrackExists(trackId string) bool {
 	track := bson.NewDocument()

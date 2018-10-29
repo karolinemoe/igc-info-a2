@@ -32,9 +32,9 @@ func TrackHandler(w http.ResponseWriter, r *http.Request) {
 	case http.MethodGet:
 	/**
 	If the http request method == POST
-	 */
+	 *//*
 	tracks := GetTracks()
-	fmt.Println(tracks)
+	fmt.Println(tracks)*/
 
 	case http.MethodPost:
 		var body struct{ URL string }
