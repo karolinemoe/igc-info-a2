@@ -30,7 +30,7 @@ func main() {
 	http.HandleFunc(root, rootHandler)
 	http.HandleFunc(root+"/api", apiHandler)
 	http.HandleFunc(root+"/api/track", TrackHandler)
-	route.HandleFunc("/track/{id}", GetTrackWithId)
+	route.HandleFunc("/track/{id}", GetTrackWithId).Methods("GET")
 
 	appengine.Main()
 }
