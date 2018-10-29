@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"github.com/mongodb/mongo-go-driver/mongo"
+	"log"
 )
 
 var db *mongo.Database
@@ -16,5 +17,15 @@ func DBConnect() (bool, error) {
 	}
 	db = connection.Database("igca2")
 	return true, err
+}
+
+func InsertTrack(track IGCTrack) interface{} {
+	collection := db.Collection("tracks")
+
+	res, err := collection.InsertOne(context.Background(), &track)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return res.InsertedID
 }
 

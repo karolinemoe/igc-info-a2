@@ -3,8 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/marni/goigc"
-	"github.com/mitchellh/hashstructure"
 	"google.golang.org/appengine"
 	"net/http"
 	"time"
@@ -27,11 +25,14 @@ func main() {
 	root := "/paragliding"
 	http.HandleFunc(root, rootHandler)
 	http.HandleFunc(root+"/api", apiHandler)
-	http.HandleFunc(root+"/api/igc", igcHandler)
+	http.HandleFunc(root+"/api/track", TrackHandler)
 
 	appengine.Main()
 }
-
+/**
+Function redirects the root url("https://igc-info-a2.herokuapp.com/paragliding)
+to the apt url(https://igc-info-a2.herokuapp.com/paragliding/api)
+ */
 func rootHandler (w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/paragliding/api", 301)
 }
@@ -40,11 +41,6 @@ func rootHandler (w http.ResponseWriter, r *http.Request) {
 
  */
 func apiHandler(w http.ResponseWriter, r *http.Request) {
-
-
-
-
-	fmt.Println("testttttt")
 
 	type Info struct {
 		Uptime string `json:"uptime"`
@@ -90,62 +86,3 @@ func absInt(n int64) int64 {
 	}
 	return n
 }
-
-/**
-
- */
- func igcHandler(w http.ResponseWriter, r *http.Request) {
-	 switch r.Method {
-	 /**
-	 If the http request method == GET
-	  */
-	 case http.MethodGet:
-	 /**
-	 If the http request method == POST
-	  */
-	 case http.MethodPost:
-	 	var body struct{ URL string }
-	 	err := json.NewDecoder(r.Body).Decode(&body)
-	 	if err != nil {
-	 		http.Error(w, err.Error(), 400); return
-		}
-
-	 	if body.URL == "" {
-	 		http.Error(w, "Body of Request does not have a 'URL' property", 400); return
-		}
-
-	 	newTrack(body.URL, w)
-	 default:
-		 http.Error(w, "No specified request method", 400); return
-	 }
- }
-
- /**
-
-  */
- func newTrack(url string, w http.ResponseWriter) {
- 	igcData, err := igc.ParseLocation(url)
-
- 	if err != nil {
- 		http.Error(w, "Problem parsing the URL", 400); return
-	}
-
- 	checksum, err := hashstructure.Hash(igcData, nil)
- 	if err != nil {
- 		http.Error(w, "Problem generating the hashstructure", 400); return
-	}
-
- 	trackID := int(checksum)
-
- 	if !trackExists(trackID) {
- 		// Save this track
-	}
-}
-
- func trackExists(trackID int) bool {
- 	if (trackID == 1) {
- 		return true
-	} else {
-		return false
- 	}
- }
