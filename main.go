@@ -31,6 +31,8 @@ func main() {
 	http.HandleFunc(root+"/api", apiHandler)
 	http.HandleFunc(root+"/api/track", TrackHandler)
 	route.HandleFunc("/track/{id}", GetTrackWithId).Methods("GET")
+	route.HandleFunc("/track/{id}/{field}", GetTrackWithIdAndField).Methods("GET")
+
 
 	http.Handle("/", r)
 

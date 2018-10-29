@@ -118,6 +118,22 @@ func GetTrackWithId(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(track)
 }
 
+func GetTrackWithIdAndField(w http.ResponseWriter, r *http.Request) {
+	param := mux.Vars(r)
+	fmt.Println("GET track with ID", param["id"])
+
+	/**
+	find the corresponding track
+	 */
+	track, err := FindTrack(param["id"])
+	if err != nil {
+		http.Error(w, "No Content", 204)
+		return
+	}
+
+	json.NewEncoder(w).Encode(track)
+}
+
 /*func trackExists(trackID int) bool {
 	if (trackID == 1) {
 		return true

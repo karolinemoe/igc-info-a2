@@ -23,12 +23,13 @@ func DBConnect() (bool, error) {
 func GetTracks() interface{} {
 	collection := db.Collection("tracks")
 	tracks := bson.NewDocument()
-	err := collection.FindOne(context.Background(), map[string]string{}).Decode(&tracks)
+	//err := collection.FindOne(context.Background(), map[string]string{}).Decode(&tracks)
+	test, err := collection.Find(nil, nil)
 	if err != nil {
 		log.Fatal(err)
 		return nil
 	}
-	tracks.WriteDocument(32, &tracks)
+	tracks.WriteDocument(32, test)
 	return tracks
 }
 
