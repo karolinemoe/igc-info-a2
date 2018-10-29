@@ -8,7 +8,7 @@ import (
 var db *mongo.Database
 
 func DBConnect() (bool, error) {
-	connection, err := mongo.NewClient("mongodb://admin:admin1@ds247439.mlab.com:47439/igca2")
+	connection, err := mongo.NewClient("mongodb://admin:adm@ds247439.mlab.com:47439/igca2")
 
 	connection.Connect(context.Background())
 	if err != nil {

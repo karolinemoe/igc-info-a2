@@ -11,8 +11,18 @@ import (
 )
 
 var startTime = time.Now()
+var dbStatus = ""
 
 func main() {
+
+	dbconnection, err := DBConnect()
+
+
+	if dbconnection == true {
+		dbStatus = "Connected to database"
+	} else {
+		dbStatus =  err.Error()
+	}
 
 	root := "/paragliding"
 	http.HandleFunc(root+"/api", apiHandler)
@@ -27,14 +37,7 @@ func main() {
 func apiHandler(w http.ResponseWriter, r *http.Request) {
 
 
-	dbconnection, err := DBConnect()
-	dbStatus := ""
 
-	if dbconnection == true {
-		dbStatus = "Connected to database"
-	} else {
-		dbStatus =  err.Error()
-	}
 
 	fmt.Println("testttttt")
 
