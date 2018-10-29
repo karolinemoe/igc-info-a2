@@ -1,6 +1,5 @@
 package main
 
-
 import (
 	"encoding/json"
 	"github.com/marni/goigc"
@@ -28,9 +27,10 @@ func TrackHandler(w http.ResponseWriter, r *http.Request) {
 	If the http request method == GET
 	 */
 	case http.MethodGet:
-		/**
-		If the http request method == POST
-		 */
+		getTracks(w)
+	/**
+	If the http request method == POST
+	 */
 	case http.MethodPost:
 		var body struct{ URL string }
 		err := json.NewDecoder(r.Body).Decode(&body)
@@ -50,6 +50,11 @@ func TrackHandler(w http.ResponseWriter, r *http.Request) {
 	default:
 		http.Error(w, "No specified request method", 400); return
 	}
+}
+
+func getTracks(w http.ResponseWriter) {
+	tracks := GetTracks()
+	json.NewEncoder(w).Encode(tracks)
 }
 
 /**
