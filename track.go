@@ -28,8 +28,11 @@ func TrackHandler(w http.ResponseWriter, r *http.Request) {
 	If the http request method == GET
 	 */
 	case http.MethodGet:
-		tracks := GetTracks()
-		json.NewEncoder(w).Encode(tracks); return
+		/*tracks := GetTracks()
+		json.NewEncoder(w).Encode(tracks)
+		*/
+		json.NewEncoder(w).Encode("Get the IGC tracks from DB"); return
+
 
 	/**
 	If the http request method == POST

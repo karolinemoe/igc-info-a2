@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"github.com/mongodb/mongo-go-driver/bson"
 	"github.com/mongodb/mongo-go-driver/mongo"
 	"log"
 )
@@ -22,7 +21,7 @@ func DBConnect() (bool, error) {
 	return true, err
 }
 
-func GetTracks() interface{} {
+/*func GetTracks() interface{} {
 	tracks := bson.NewDocument()
 	err := collection.FindOne(context.Background(), map[string]string{}).Decode(&tracks)
 	if err != nil {
@@ -31,7 +30,7 @@ func GetTracks() interface{} {
 	}
 	tracks.WriteDocument(32, &tracks)
 	return tracks
-}
+}*/
 
 func InsertTrack(track IGCTrack) interface{} {
 	res, err := collection.InsertOne(context.Background(), &track)
