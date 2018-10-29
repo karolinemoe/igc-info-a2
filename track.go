@@ -60,12 +60,12 @@ func newTrack(url string, w http.ResponseWriter) int {
 	igcData, err := igc.ParseLocation(url)
 
 	if err != nil {
-		http.Error(w, "Problem parsing the URL", 400); return
+		http.Error(w, "Problem parsing the URL", 400)
 	}
 
 	checksum, err := hashstructure.Hash(igcData, nil)
 	if err != nil {
-		http.Error(w, "Problem generating the hashstructure", 400); return
+		http.Error(w, "Problem generating the hashstructure", 400)
 	}
 
 	trackID := int(checksum)
