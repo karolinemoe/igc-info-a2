@@ -33,7 +33,6 @@ func TrackHandler(w http.ResponseWriter, r *http.Request) {
 		If the http request method == POST
 		 */
 		 fmt.Println("Helloo?")
-		 return
 
 	case http.MethodPost:
 		var body struct{ URL string }
