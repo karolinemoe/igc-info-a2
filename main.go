@@ -25,7 +25,7 @@ func main() {
 
 	root := "/paragliding"
 	r := mux.NewRouter()
-	route := r.PathPrefix(root+"/api").Subrouter()
+	route := r.PathPrefix("/paragliding/api").Subrouter()
 
 	http.HandleFunc(root, rootHandler)
 	http.HandleFunc(root+"/api", apiHandler)
