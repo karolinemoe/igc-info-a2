@@ -29,6 +29,7 @@ func TrackHandler(w http.ResponseWriter, r *http.Request) {
 	 */
 	case http.MethodGet:
 		getTracks(w)
+		return
 	/**
 	If the http request method == POST
 	 */
